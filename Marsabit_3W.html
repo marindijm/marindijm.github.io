@@ -44,10 +44,11 @@ rect:hover {  fill:blue; }
 <script>
 function dashboard(id, ActivData){
     var barColor = 'steelblue';
-    function segColor(c){ return {Community_Empowerment:"#807dba", Education:"#e08214",Health_care:"#41ab5d",Security:"#8b2114",WASH:"#1e90ff",Water_Provision:"#92b055"}[c]; }
+    ////'CE': 22,'Ed': 1,'HC': 1,'SEC': 3,'WH': 0,'WP':
+    function segColor(c){ return {CE:"#807dba", Ed:"#e08214",HC:"#41ab5d",SEC:"#8b2114",WH:"#1e90ff",WP:"#92b055"}[c]; }
     
     // compute total for each state.
-ActivData.forEach(function(d){d.total=d.Activ.Community_Empowerment+d.Activ.Education+d.Activ.Health_care+d.Activ.Security+d.Activ.WASH+d.Activ.Water_Provision});
+ActivData.forEach(function(d){d.total=d.Activ.CE+d.Activ.Ed+d.Activ.HC+d.Activ.SEC+d.Activ.WH+d.Activ.WP});
        // function to handle histogram.
     function histoGram(fD){
         var hG={},    hGDim = {t: 60, r: 0, b: 30, l: 0};
@@ -224,9 +225,9 @@ ActivData.forEach(function(d){d.total=d.Activ.Community_Empowerment+d.Activ.Educ
 
         return leg;
     }
-    
+    //'CE': 22,'Ed': 1,'HC': 1,'SEC': 3,'WH': 0,'WP':
     // calculate total Activuency by segment for all state.
-    var tF = ['Community_Empowerment','Education','Health_care','Security','WASH','Water_Provision'].map(function(d){ 
+    var tF = ['CE','Ed','HC','SEC','WH','WP'].map(function(d){ 
         return {type:d, Activ: d3.sum(ActivData.map(function(t){ return t.Activ[d];}))}; 
     });    
     
@@ -241,11 +242,11 @@ ActivData.forEach(function(d){d.total=d.Activ.Community_Empowerment+d.Activ.Educ
 
 <script>
 var ActivData=[
-  {'Donor': 'ECHO', Activ:{'Community_Empowerment': 22,'Education': 1,'Health_care': 1,'Security': 3,'WASH': 0,'Water_Provision': 16}},
-  {'Donor': 'BMZ', Activ:{'Community_Empowerment': 7,'Education': 0,'Health_care': 2,'Security': 2,'WASH': 3,'Water_Provision': 1  }},
-  {'Donor': 'CDTF', Activ:{'Community_Empowerment': 0,'Education': 1,'Health_care': 1,'Security': 0,'WASH': 0,'Water_Provision': 1 }},
-  {'Donor': 'GIZ', Activ:{'Community_Empowerment': 14,'Education': 0,'Health_care': 2,'Security': 2,'WASH': 3,'Water_Provision': 3 }},
-  {'Donor': 'VSF', Activ:{'Community_Empowerment': 7, 'Education': 0,'Health_care': 2,'Security': 1,'WASH': 1,'Water_Provision': 0 }},
+  {'Donor': 'ECHO', Activ:{'CE': 22,'Ed': 1,'HC': 1,'SEC': 3,'WH': 0,'WP': 16}},
+  {'Donor': 'BMZ', Activ:{'CE': 7,'Ed': 0,'HC': 2,'SEC': 2,'WH': 3,'WP': 1  }},
+  {'Donor': 'CDTF', Activ:{'CE': 0,'Ed': 1,'HC': 1,'SEC': 0,'WH': 0,'WP': 1 }},
+  {'Donor': 'GIZ', Activ:{'CE': 14,'Ed': 0,'HC': 2,'SEC': 2,'WH': 3,'WP': 3 }},
+  {'Donor': 'VSF', Activ:{'CE': 7, 'Ed': 0,'HC': 2,'SEC': 1,'WH': 1,'WP': 0 }},
  ];
 
 dashboard('#dashboard',ActivData);
