@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <style>
 body{
-    width:1060px;
+    width:1500px;
     margin:50px auto;
 }
 path {  stroke: #fff; }
@@ -33,7 +33,7 @@ rect:hover {  fill:blue; }
 }
 .legendActiv, .legendPerc{
     align:right;
-    width:50px;
+    width:120px;
 }
 
 </style>
@@ -48,7 +48,7 @@ function dashboard(id, ActivData){
     function segColor(c){ return {CE:"#807dba", Ed:"#e08214",HC:"#41ab5d",SEC:"#8b2114",WH:"#1e90ff",WP:"#92b055"}[c]; }
     
     // compute total for each state.
-ActivData.forEach(function(d){d.total=d.Activ.CE+d.Activ.Ed+d.Activ.HC+d.Activ.SEC+d.Activ.WH+d.Activ.WP});
+ActivData.forEach(function(d){d.total=d.Activ.CE + d.Activ.Ed + d.Activ.HC + d.Activ.SEC + d.Activ.WH + d.Activ.WP});
        // function to handle histogram.
     function histoGram(fD){
         var hG={},    hGDim = {t: 60, r: 0, b: 30, l: 0};
