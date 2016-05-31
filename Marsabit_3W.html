@@ -33,7 +33,7 @@ rect:hover {  fill:blue; }
 }
 .legendActiv, .legendPerc{
     align:right;
-    width:120px;
+    width:100px;
 }
 
 </style>
@@ -134,7 +134,7 @@ ActivData.forEach(function(d){d.total=d.CE + d.Ed + d.HC + d.SEC + d.WH + d.WP})
     
     // function to handle pieChart.
     function pieChart(pD){
-        var pC ={},    pieDim ={w:300, h: 300};
+        var pC ={},    pieDim ={w:400, h: 400};
         pieDim.r = Math.min(pieDim.w, pieDim.h) / 2;
                 
         // create svg for pie chart.
@@ -242,11 +242,11 @@ ActivData.forEach(function(d){d.total=d.CE + d.Ed + d.HC + d.SEC + d.WH + d.WP})
 
 <script>
 var ActivData=[
-  {'Donor': 'ECHO', Activ:{'CE': 22,'Ed': 1,'HC': 1,'SEC': 3,'WH': 0,'WP': 16}},
-  {'Donor': 'BMZ', Activ:{'CE': 7,'Ed': 0,'HC': 2,'SEC': 2,'WH': 3,'WP': 1  }},
-  {'Donor': 'CDTF', Activ:{'CE': 0,'Ed': 1,'HC': 1,'SEC': 0,'WH': 0,'WP': 1 }},
-  {'Donor': 'GIZ', Activ:{'CE': 14,'Ed': 0,'HC': 2,'SEC': 2,'WH': 3,'WP': 3 }},
-  {'Donor': 'VSF', Activ:{'CE': 7, 'Ed': 0,'HC': 2,'SEC': 1,'WH': 1,'WP': 0 }},
+  {'Donor': 'ECHO', Activ:{'CE':22,'Ed':1,'HC':1,'SEC':3,'WH':0,'WP':16}},
+  {'Donor': 'BMZ', Activ:{'CE':7,'Ed':0,'HC':2,'SEC':2,'WH':3,'WP':1  }},
+  {'Donor': 'CDTF', Activ:{'CE':0,'Ed':1,'HC':1,'SEC':0,'WH':0,'WP':1 }},
+  {'Donor': 'GIZ', Activ:{'CE':14,'Ed':0,'HC':2,'SEC':2,'WH':3,'WP':3 }},
+  {'Donor': 'VSF', Activ:{'CE':7, 'Ed':0,'HC':2,'SEC':1,'WH':1,'WP':0 }},
  ];
 
 dashboard('#dashboard',ActivData);
