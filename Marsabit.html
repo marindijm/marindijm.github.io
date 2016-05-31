@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <style>
 body{
-    width:1500px;
+    width:1300px;
     margin:50px auto;
 }
 path {  stroke: #fff; }
@@ -47,11 +47,11 @@ function dashboard(id, ActivData){
     function segColor(c){ return {Community_Empowerment:"#807dba", Education:"#e08214",Health_care:"#41ab5d",Security:"#8b2114",WASH:"#1e90ff",Water_Provision:"#92b055"}[c]; }
     
     // compute total for each Donor.
-ActivData.forEach(function(d){d.total=d.Community_Empowerment + d.Education + d.Health_care + d.Security + d.WASH + d.Water_Provision});
+ActivData.forEach(function(d){d.total=d.Activ.Community_Empowerment + d.Activ.Education + d.Activ.Health_care + d.Activ.Security + d.Activ.WASH + d.Activ.Water_Provision});
        // function to handle histogram.
     function histoGram(fD){
         var hG={},    hGDim = {t: 60, r: 0, b: 30, l: 0};
-        hGDim.w = 900 - hGDim.l - hGDim.r, 
+        hGDim.w = 800 - hGDim.l - hGDim.r, 
         hGDim.h = 300 - hGDim.t - hGDim.b;
             
         //create svg for histogram.
