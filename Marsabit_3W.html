@@ -192,8 +192,8 @@ ActivData.forEach(function(d){d.total=d.Activ.CE+d.Activ.Ed+d.Activ.HC+d.Activ.S
         var tr = legend.append("tbody").selectAll("tr").data(lD).enter().append("tr");
             
         // create the first column for each segment.
-        tr.append("td").append("svg").attr("width", '16').attr("height", '16').append("rect")
-            .attr("width", '16').attr("height", '16')
+        tr.append("td").append("svg").attr("width", '10').attr("height", '16').append("rect")
+            .attr("width", '10').attr("height", '16')
 			.attr("fill",function(d){ return segColor(d.type); });
             
         // create the second column for each segment.
