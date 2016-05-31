@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <style>
 body{
-    width:1060px;
+    width:1500px;
     margin:50px auto;
 }
 path {  stroke: #fff; }
@@ -51,7 +51,7 @@ ActivData.forEach(function(d){d.total=d.Community_Empowerment + d.Education + d.
        // function to handle histogram.
     function histoGram(fD){
         var hG={},    hGDim = {t: 60, r: 0, b: 30, l: 0};
-        hGDim.w = 500 - hGDim.l - hGDim.r, 
+        hGDim.w = 900 - hGDim.l - hGDim.r, 
         hGDim.h = 300 - hGDim.t - hGDim.b;
             
         //create svg for histogram.
@@ -133,7 +133,7 @@ ActivData.forEach(function(d){d.total=d.Community_Empowerment + d.Education + d.
     
     // function to handle pieChart.
     function pieChart(pD){
-        var pC ={},    pieDim ={w:300, h: 300};
+        var pC ={},    pieDim ={w:400, h: 400};
         pieDim.r = Math.min(pieDim.w, pieDim.h) / 2;
                 
         // create svg for pie chart.
