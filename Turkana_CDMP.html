@@ -1,4 +1,9 @@
+<meta charset="utf-8">
 <style>
+body{
+    width:1300px;
+    margin:50px auto;
+}
 path {  stroke: #fff; }
 path:hover {  opacity:0.9; }
 rect:hover {  fill:blue; }
@@ -27,67 +32,21 @@ rect:hover {  fill:blue; }
     width:120px;
 }
 </style>
-
 <body>
-<div id='dashboard1'>
+<div id='dashboard'>
 </div>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
-function dashboard1(id, ActivData){
+function dashboard(id, ActivData){
     var barColor = 'steelblue';
-    function segColor(c){ return {Community_Empowerment:"#807dba", Education:"#e08214",Health_care:"#41ab5d",Security:"#8b2114",Food_Provision:"#1e90ff",Water_Provision:"#92b055"}[c]; }
+    function segColor(c){ return {Community_Empowerment:"#807dba", Education:"#e08214",Health_care:"#41ab5d",Security:"#8b2114",Food_provision:"#1e90ff",Water_Provision:"#92b055"}[c]; }
     
     // compute total for each Donor.
-ActivData.forEach(function(d){d.total=d.Activ.Community_Empowerment + d.Activ.Education + d.Activ.Health_care + d.Activ.Security + d.Activ.Food_Provision + d.Activ.Water_Provision});
-    // function to handle pieChart.
-    function pieChart(pD){
-        var pC ={},    pieDim ={w:300, h: 300};
-        pieDim.r = Math.min(pieDim.w, pieDim.h) / 2;
-                
-        // create svg for pie chart.
-        var piesvg = d3.select(id).append("svg")
-            .attr("width", pieDim.w).attr("height", pieDim.h).append("g")
-            .attr("transform", "translate("+pieDim.w/2+","+pieDim.h/2+")");
-        
-        // create function to draw the arcs of the pie slices.
-        var arc = d3.svg.arc().outerRadius(pieDim.r - 10).innerRadius(0);
-        // create a function to compute the pie slice angles.
-        var pie = d3.layout.pie().sort(null).value(function(d) { return d.Activ; });
-        // Draw the pie slices.
-        piesvg.selectAll("path").data(pie(pD)).enter().append("path").attr("d", arc)
-            .each(function(d) { this._current = d; })
-            .style("fill", function(d) { return segColor(d.data.type); })
-            .on("mouseover",mouseover).on("mouseout",mouseout);
-        // create function to update pie-chart. This will be used by histogram.
-        pC.update = function(nD){
-            piesvg.selectAll("path").data(pie(nD)).transition().duration(500)
-                .attrTween("d", arcTween);
-        }        
-        // Utility function to be called on mouseover a pie slice.
-        function mouseover(d){
-            // call the update function of histogram with new data.
-            hG.update(ActivData.map(function(v){ 
-                return [v.Donor,v.Activ[d.data.type]];}),segColor(d.data.type));
-        }
-        //Utility function to be called on mouseout a pie slice.
-        function mouseout(d){
-            // call the update function of histogram with all data.
-            hG.update(ActivData.map(function(v){
-                return [v.Donor,v.total];}), barColor);
-        }
-        // Animating the pie-slice requiring a custom function which specifies
-        // how the intermediate paths should be drawn.
-        function arcTween(a) {
-            var i = d3.interpolate(this._current, a);
-            this._current = i(0);
-            return function(t) { return arc(i(t));    };
-        }    
-        return pC;
-    }
-           // function to handle histogram.
+ActivData.forEach(function(d){d.total=d.Activ.Community_Empowerment + d.Activ.Education + d.Activ.Health_care + d.Activ.Security + d.Activ.Food_provision + d.Activ.Water_Provision});
+       // function to handle histogram.
     function histoGram(fD){
         var hG={},    hGDim = {t: 60, r: 0, b: 30, l: 0};
-        hGDim.w = 700 - hGDim.l - hGDim.r, 
+        hGDim.w = 800 - hGDim.l - hGDim.r, 
         hGDim.h = 300 - hGDim.t - hGDim.b;
             
         //create svg for histogram.
@@ -162,6 +121,52 @@ ActivData.forEach(function(d){d.total=d.Activ.Community_Empowerment + d.Activ.Ed
         return hG;
     }
     
+    // function to handle pieChart.
+    function pieChart(pD){
+        var pC ={},    pieDim ={w:400, h: 400};
+        pieDim.r = Math.min(pieDim.w, pieDim.h) / 2;
+                
+        // create svg for pie chart.
+        var piesvg = d3.select(id).append("svg")
+            .attr("width", pieDim.w).attr("height", pieDim.h).append("g")
+            .attr("transform", "translate("+pieDim.w/2+","+pieDim.h/2+")");
+        
+        // create function to draw the arcs of the pie slices.
+        var arc = d3.svg.arc().outerRadius(pieDim.r - 10).innerRadius(0);
+        // create a function to compute the pie slice angles.
+        var pie = d3.layout.pie().sort(null).value(function(d) { return d.Activ; });
+        // Draw the pie slices.
+        piesvg.selectAll("path").data(pie(pD)).enter().append("path").attr("d", arc)
+            .each(function(d) { this._current = d; })
+            .style("fill", function(d) { return segColor(d.data.type); })
+            .on("mouseover",mouseover).on("mouseout",mouseout);
+        // create function to update pie-chart. This will be used by histogram.
+        pC.update = function(nD){
+            piesvg.selectAll("path").data(pie(nD)).transition().duration(500)
+                .attrTween("d", arcTween);
+        }        
+        // Utility function to be called on mouseover a pie slice.
+        function mouseover(d){
+            // call the update function of histogram with new data.
+            hG.update(ActivData.map(function(v){ 
+                return [v.Donor,v.Activ[d.data.type]];}),segColor(d.data.type));
+        }
+        //Utility function to be called on mouseout a pie slice.
+        function mouseout(d){
+            // call the update function of histogram with all data.
+            hG.update(ActivData.map(function(v){
+                return [v.Donor,v.total];}), barColor);
+        }
+        // Animating the pie-slice requiring a custom function which specifies
+        // how the intermediate paths should be drawn.
+        function arcTween(a) {
+            var i = d3.interpolate(this._current, a);
+            this._current = i(0);
+            return function(t) { return arc(i(t));    };
+        }    
+        return pC;
+    }
+    
     // function to handle legend.
     function legend(lD){
         var leg = {};
@@ -202,7 +207,7 @@ ActivData.forEach(function(d){d.total=d.Activ.Community_Empowerment + d.Activ.Ed
     }
     
     // calculate total Activuency by segment for all Donor.
-    var tF = ['Community_Empowerment','Education','Health_care','Security','Food_Provision','Water_Provision'].map(function(d){ 
+    var tF = ['Community_Empowerment','Education','Health_care','Security','Food_provision','Water_Provision'].map(function(d){ 
         return {type:d, Activ: d3.sum(ActivData.map(function(t){ return t.Activ[d];}))}; 
     });    
     
@@ -213,10 +218,10 @@ ActivData.forEach(function(d){d.total=d.Activ.Community_Empowerment + d.Activ.Ed
         leg= legend(tF);  // create the legend.
 }
 </script>
-//d.Activ.Community_Empowerment + d.Activ.Education + d.Activ.Health_care + d.Activ.Security + d.Activ.Food_Provision + d.Activ.Water_Provision})
+
 <script>
 var ActivData=[
-{'Donor':'OXFAM', Activ:{'Community_Empowerment':7,'Education':0,'Food_Provision':0,'Health_care':0,'Security':0,'Water_Provision':0}},
+  {'Donor':'OXFAM', Activ:{'Community_Empowerment':7,'Education':0,'Food_Provision':0,'Health_care':0,'Security':0,'Water_Provision':0}},
 {'Donor':'ECHO', Activ:{'Community_Empowerment':5,'Education':0,'Food_Provision':0,'Health_care':2,'Security':0,'Water_Provision':7}},
 {'Donor':'VSF', Activ:{'Community_Empowerment':1,'Education':0,'Food_Provision':0,'Health_care':0,'Security':0,'Water_Provision':0}},
 {'Donor':'World_Vision' Activ:{,'Community_Empowerment':0,'Education':0,'Food_Provision':1,'Health_care':0,'Security':0,'Water_Provision':0}},
@@ -227,5 +232,5 @@ var ActivData=[
 {'Donor':'National_Govt', Activ:{'Community_Empowerment':4,'Education':12,'Food_Provision':1,'Health_care':3,'Security':1,'Water_Provision':4}},
 {'Donor':'FBO',Activ:{'Community_Empowerment':0,'Education':0,'Food_Provision':0,'Health_care':0,'Security':0,'Water_Provision':1}}
 ];
-dashboard1('#dashboard1',ActivData);
+dashboard('#dashboard',ActivData);
 </script>
