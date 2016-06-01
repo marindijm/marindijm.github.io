@@ -74,10 +74,10 @@ rect:hover {  fill:blue; }
 <script>
 function dashboard(id, ActivData){
     var barColor = 'steelblue';
-    function segColor(c){ return {Community_Empowerment:"#807dba", Education:"#e08214",Health_care:"#41ab5d",Security:"#8b2114",WASH:"#1e90ff",Water_Provision:"#92b055"}[c]; }
+    function segColor(c){ return {Community_Empowerment:"#807dba", Education:"#e08214",Health_care:"#41ab5d",Security:"#8b2114",WASH:"#1e90ff",Water_Provision:"#92b055",Food_Provision:"#741109"}[c]; }
     
     // compute total for each Donor.
-ActivData.forEach(function(d){d.total=d.Activ.Community_Empowerment + d.Activ.Education + d.Activ.Health_care + d.Activ.Security + d.Activ.WASH + d.Activ.Water_Provision});
+ActivData.forEach(function(d){d.total=d.Activ.Community_Empowerment + d.Activ.Education + d.Activ.Health_care + d.Activ.Security + d.Activ.WASH + d.Activ.Water_Provision + d.Activ.Food_Provision});
     // function to handle pieChart.
     function pieChart(pD){
         var pC ={},    pieDim ={w:300, h: 300};
