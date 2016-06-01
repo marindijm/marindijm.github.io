@@ -548,7 +548,7 @@ rect:hover {  fill:blue; }
 }
 </style>
 <body>
-<div id='dashboard'>
+<div id='dashboard2'>
 </div>
 <script src='http://d3js.org/d3.v3.min.js'></script>
 <script>
@@ -638,7 +638,7 @@ ActivData.forEach(function(d){d.total=d.Activ.Community_Empowerment + d.Activ.Ed
     
     // function to handle pieChart.
     function pieChart(pD){
-        var pC ={},    pieDim ={w:400, h: 400};
+        var pC ={},    pieDim ={w:300, h: 300};
         pieDim.r = Math.min(pieDim.w, pieDim.h) / 2;
                 
         // create svg for pie chart.
@@ -741,7 +741,7 @@ var ActivData=[
 	{'Donor': 'County_Govt',Activ:{'Community_Empowerment':12,'Education':0,'Health_care':1,'Water_Provision':1}},
 	{'Donor': 'National_Govt', Activ:{'Community_Empowerment':1,'Education':2,'Health_care':0,'Water_Provision':0}}
 	];
-dashboard('#dashboard',ActivData);
+dashboard2('#dashboard2',ActivData);
 </script>	
   		
   		
