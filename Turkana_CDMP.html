@@ -40,10 +40,10 @@ rect:hover {  fill:blue; }
 <script>
 function dashboard(id, ActivData){
     var barColor = 'steelblue';
-    function segColor(c){ return {Community_Empowerment:"#807dba", Education:"#e08214",Health_care:"#41ab5d",Security:"#8b2114",WASH:"#1e90ff",Water_Provision:"#92b055"}[c]; }
+    function segColor(c){ return {Community_Empowerment:"#807dba", Education:"#e08214",Health_care:"#41ab5d",Security:"#8b2114",Food_provision:"#1e90ff",Water_Provision:"#92b055"}[c]; }
     
     // compute total for each Donor.
-ActivData.forEach(function(d){d.total=d.Activ.Community_Empowerment + d.Activ.Education + d.Activ.Health_care + d.Activ.Security + d.Activ.WASH + d.Activ.Water_Provision});
+ActivData.forEach(function(d){d.total=d.Activ.Community_Empowerment + d.Activ.Education + d.Activ.Health_care + d.Activ.Security + d.Activ.Food_provision + d.Activ.Water_Provision});
        // function to handle histogram.
     function histoGram(fD){
         var hG={},    hGDim = {t: 60, r: 0, b: 30, l: 0};
@@ -208,7 +208,7 @@ ActivData.forEach(function(d){d.total=d.Activ.Community_Empowerment + d.Activ.Ed
     }
     
     // calculate total Activuency by segment for all Donor.
-    var tF = ['Community_Empowerment','Education','Health_care','Security','WASH','Water_Provision'].map(function(d){ 
+    var tF = ['Community_Empowerment','Education','Health_care','Security','Food_provision','Water_Provision'].map(function(d){ 
         return {type:d, Activ: d3.sum(ActivData.map(function(t){ return t.Activ[d];}))}; 
     });    
     
@@ -222,15 +222,15 @@ ActivData.forEach(function(d){d.total=d.Activ.Community_Empowerment + d.Activ.Ed
 
 <script>
 var ActivData=[
-  {'Donor': 'ECHO', Activ:{'Community_Empowerment': 22,'Education': 1,'Health_care': 1,'Security': 3,'WASH': 0,'Water_Provision': 16}},
-  {'Donor': 'BMZ', Activ:{'Community_Empowerment': 7,'Education': 0,'Health_care': 2,'Security': 2,'WASH': 3,'Water_Provision': 1  }},
-  {'Donor': 'CDTF', Activ:{'Community_Empowerment': 0,'Education': 1,'Health_care': 1,'Security': 0,'WASH': 0,'Water_Provision': 1 }},
-  {'Donor': 'GIZ', Activ:{'Community_Empowerment': 14,'Education': 0,'Health_care': 2,'Security': 2,'WASH': 3,'Water_Provision': 3 }},
-  {'Donor': 'VSF', Activ:{'Community_Empowerment': 7, 'Education': 0,'Health_care': 2,'Security': 1,'WASH': 1,'Water_Provision': 0 }},
-  {'Donor': 'Solidarities', Activ:{'Community_Empowerment': 1,'Education': 0,'Health_care': 0,'Security': 0,'WASH': 0,'Water_Provision': 1}},
-  {'Donor': 'County_Govt', Activ:{'Community_Empowerment': 1,'Education': 1,'Health_care': 1,'Security': 0,'WASH': 0,'Water_Provision': 0}},
-  {'Donor': 'National_Govt', Activ:{'Community_Empowerment': 0,'Education': 2,'Health_care': 0,'Security': 0,'WASH': 0,'Water_Provision': 2 }},
-  {'Donor': 'Marsabit_catholic', Activ:{'Community_Empowerment': 2,'Education': 0,'Health_care': 0,'Security': 0,'WASH': 0,'Water_Provision': 0}}
-];
+{'Donor':'OXFAM', Activ:{'Community_Empowerment':7,'Education':0,'Food_Provision':0,'Health_care':0,'Security':0,'Water_Provision':0}},
+{'Donor':'ECHO', Activ:{'Community_Empowerment':5,'Education':0,'Food_Provision':0,'Health_care':2,'Security':0,'Water_Provision':7}},
+{'Donor':'VSF', Activ:{'Community_Empowerment':1,'Education':0,'Food_Provision':0,'Health_care':0,'Security':0,'Water_Provision':0}},
+{'Donor':'World_Vision' Activ:{,'Community_Empowerment':0,'Education':0,'Food_Provision':1,'Health_care':0,'Security':0,'Water_Provision':0}},
+{'Donor':'UNHCR', Activ:{'Community_Empowerment':0,'Education':1,'Food_Provision':0,'Health_care':0,'Security':0,'Water_Provision':0}},
+{'Donor':'UNICEF', Activ:{'Community_Empowerment':0,'Education':1,'Food_Provision':0,'Health_care':0,'Security':0,'Water_Provision':0}},
+{'Donor':'Community_funds', Activ:{'Community_Empowerment':3,'Education':0,'Food_Provision':0,'Health_care':1,'Security':0,'Water_Provision':0}},
+{'Donor':'County_Govt', Activ:{'Community_Empowerment':1,'Education':7,'Food_Provision':0,'Health_care':5,'Security':0,'Water_Provision':5}},
+{'Donor':'National_Govt', Activ:{'Community_Empowerment':4,'Education':12,'Food_Provision':1,'Health_care':3,'Security':1,'Water_Provision':4}},
+{'Donor':'FBO',Activ:{'Community_Empowerment':0,'Education':0,'Food_Provision':0,'Health_care':0,'Security':0,'Water_Provision':1}}];
 dashboard('#dashboard',ActivData);
 </script>
