@@ -100,7 +100,7 @@ strong {
 ul {
   list-style-position: inside;
   list-style: disc;
-  padding-left: 25px;
+  padding-left: 15px;
 }
 
 ol {
@@ -369,7 +369,7 @@ footer {
 
   header ul {
     position:absolute;
-    right:130px;
+    right:80px;
     top:84px;
   }
 }
