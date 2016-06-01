@@ -40,10 +40,10 @@ rect:hover {  fill:blue; }
 <script>
 function dashboard(id, ActivData){
     var barColor = 'steelblue';
-    function segColor(c){ return {Community_Empowerment:"#807dba", Education:"#e08214",Health_care:"#41ab5d",Security:"#8b2114",Food_provision:"#1e90ff",Water_Provision:"#92b055"}[c]; }
+    function segColor(c){ return {Community_Empowerment:"#807dba", Education:"#e08214",Food_provision:"#1e90ff",Health_care:"#41ab5d",Security:"#8b2114",Water_Provision:"#92b055"}[c]; }
     
     // compute total for each Donor.
-ActivData.forEach(function(d){d.total=d.Activ.Community_Empowerment + d.Activ.Education + d.Activ.Health_care + d.Activ.Security + d.Activ.Food_provision + d.Activ.Water_Provision});
+ActivData.forEach(function(d){d.total=d.Activ.Community_Empowerment + d.Activ.Education + d.Activ.Food_provision + d.Activ.Health_care + d.Activ.Security + d.Activ.Water_Provision});
        // function to handle histogram.
     function histoGram(fD){
         var hG={},    hGDim = {t: 60, r: 0, b: 30, l: 0};
@@ -208,7 +208,7 @@ ActivData.forEach(function(d){d.total=d.Activ.Community_Empowerment + d.Activ.Ed
     }
     
     // calculate total Activuency by segment for all Donor.
-    var tF = ['Community_Empowerment','Education','Health_care','Security','Food_provision','Water_Provision'].map(function(d){ 
+    var tF = ['Community_Empowerment','Education','Food_provision','Health_care','Security','Water_Provision'].map(function(d){ 
         return {type:d, Activ: d3.sum(ActivData.map(function(t){ return t.Activ[d];}))}; 
     });    
     
